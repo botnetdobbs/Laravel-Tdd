@@ -1,7 +1,4 @@
-<h1>Post</h1>
-
-{{$post->title}}
-<hr>
+<h1>{{$post->title}}</h1>
 <br>
 {{$post->body}}
 <hr>

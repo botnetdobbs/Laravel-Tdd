@@ -17,7 +17,11 @@ Route::get('/', function () {
 
 Route::get('/posts', 'PostsController@index');
 
+Route::post('/posts', 'PostsController@store');
+
 Route::get('/post/{id}', 'PostsController@show');
+
+Route::get('/posts/create', 'PostsController@create');
 
 Auth::routes();
 
