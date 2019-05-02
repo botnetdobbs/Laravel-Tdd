@@ -6,6 +6,18 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    /**
+     * returns all the available posts
+     *
+     * @return View
+     */
+    public function index()
+    {
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
+    }
+
     /**
      * returns a single post item
      *
