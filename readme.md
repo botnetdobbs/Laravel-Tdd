@@ -43,6 +43,9 @@ Inside the project root folder, run the command below in your console
 $ php artisan migrate:fresh
 ```
 ```
+$ php artisan db:seed
+```
+```
 $ php artisan serve
 ```
 ## Running the tests
