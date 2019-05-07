@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 
 <h1>Create Post</h1>
 <form method="POST" action="/posts">
@@ -12,3 +15,5 @@
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <button type="submit" class="btn btn-primary">Save Post</button>
 </form>
+
+@endsection
