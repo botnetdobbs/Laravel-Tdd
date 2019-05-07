@@ -8,6 +8,11 @@ use App\Post;
 class PostsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * returns all the available posts
      *

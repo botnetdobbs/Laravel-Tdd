@@ -10,5 +10,5 @@
       <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
     </div>
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Save Post</button>
 </form>
