@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Post;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,7 +18,9 @@ class CreateNewPostTest extends TestCase
      * @return void
      */
     public function canViewPageForCreatingPost()
-    {
+    {   // generate the user and set as currently authenticated
+        $this->be(\factory(User::class)->create());
+
         $response = $this->get('/posts/create');
         $response->assertStatus(200);
         $response->assertSee('Create Post');
@@ -31,11 +34,12 @@ class CreateNewPostTest extends TestCase
      */
     public function canCreateNewPost()
     {
-        // arrange
+        // arrange - create the user array and generate the user and set as currently authenticated
         $post = [
             'title' => 'new Post',
             'body' => 'new post created just now',
         ];
+        $this->be(\factory(User::class)->create());
 
         //action
         $response = $this->post('/posts', $post);
@@ -59,6 +63,9 @@ class CreateNewPostTest extends TestCase
             'title' => null,
             'body' => 'new post created just now',
         ];
+
+        $this->be(\factory(User::class)->create());
+
 
         // action
         $response = $this->post('/posts', $post);
