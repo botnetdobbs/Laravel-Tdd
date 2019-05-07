@@ -9,6 +9,6 @@
       <label for="body">Description</label>
       <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
     </div>
-    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+    {{ csrf_field() }}
     <button type="submit" class="btn btn-primary">Save Post</button>
 </form>

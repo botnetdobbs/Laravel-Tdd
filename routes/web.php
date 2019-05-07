@@ -21,6 +21,10 @@ Route::post('/posts', 'PostsController@store');
 
 Route::get('/post/{id}', 'PostsController@show');
 
+Route::get('/post/{id}/edit', 'PostsController@edit');
+
+Route::put('/post/{id}', 'PostsController@update');
+
 Route::get('/posts/create', 'PostsController@create');
 
 Auth::routes();
