@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogPost;
 use App\Post;
 
 class PostsController extends Controller
@@ -32,5 +33,27 @@ class PostsController extends Controller
             abort(404);
         }
         return \view('posts.show', \compact('post'));
+    }
+    
+    /**
+     * returns view form to add an article
+     *
+     * @return void
+     */
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    /**
+     * stores new post
+     * 
+     * @return mixed
+     */
+    public function store(StoreBlogPost $request)
+    {
+        $validatedPost = $request->validated();
+        Post::create($validatedPost);
+        return \redirect('posts');
     }
 }
