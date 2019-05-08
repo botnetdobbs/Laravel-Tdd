@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class CreatePostTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
     /**
      * @test
      *
