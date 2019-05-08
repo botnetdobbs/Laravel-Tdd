@@ -1,5 +1,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f24837ce3bb6cedb9205/maintainability)](https://codeclimate.com/github/botnetdobbs/Laravel-Tdd/maintainability)
 
+[![CircleCI](https://circleci.com/gh/botnetdobbs/Laravel-Tdd.svg?style=svg)](https://circleci.com/gh/botnetdobbs/Laravel-Tdd)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f24837ce3bb6cedb9205/test_coverage)](https://codeclimate.com/github/botnetdobbs/Laravel-Tdd/test_coverage)
+
 
 ## Setup
 
