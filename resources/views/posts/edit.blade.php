@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>Edit Post</h1>
 <form method="POST" action="/post/{{$post->id}}">
   {{ method_field('PUT') }}
@@ -12,3 +16,5 @@
     {{ csrf_field() }}
     <button type="submit" class="btn btn-primary">Save Post</button>
 </form>
+
+@endsection
