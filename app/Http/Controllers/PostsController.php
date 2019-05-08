@@ -7,7 +7,6 @@ use App\Post;
 
 class PostsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
@@ -52,7 +51,7 @@ class PostsController extends Controller
 
     /**
      * stores new post
-     * 
+     *
      * @return mixed
      */
     public function store(StoreBlogPost $request)
@@ -60,5 +59,30 @@ class PostsController extends Controller
         $validatedPost = $request->validated();
         Post::create($validatedPost);
         return \redirect('posts');
+    }
+
+    /**
+     * returns view for editing a specific post
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        return \view('posts.edit', compact('post'));
+    }
+
+    /**
+     * updates existing post
+     *
+     * @return mixed
+     */
+    public function update(StoreBlogPost $request, $id)
+    {
+        $validatedPost = $request->validated();
+        $post = Post::find($id);
+        $post->update($validatedPost);
+        return \redirect("post/$id");
     }
 }
