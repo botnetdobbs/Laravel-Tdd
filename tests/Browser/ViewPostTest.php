@@ -20,7 +20,7 @@ class ViewPostTest extends DuskTestCase
         $post = \factory(App\Post::class)->create();
         $pos1 = \factory(App\Post::class)->create();
 
-        $this->browse(function(Browser $browser) {
+        $this->browse(function (Browser $browser) {
             $browser->visit('/posts')
                     ->assertSee($post->title)
                     ->clickLink($post1->title)

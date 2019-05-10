@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogPost;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostsController extends Controller
 {
@@ -20,14 +20,14 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with("author")->get();
         return view('posts.index', compact('posts'));
     }
 
     /**
      * returns a single post item
      *
-     * @param [int] $id
+     * @param int $id
      * @return View
      */
     public function show($id)
@@ -39,7 +39,7 @@ class PostsController extends Controller
         }
         return \view('posts.show', \compact('post'));
     }
-    
+
     /**
      * returns view form to add an article
      *
@@ -58,25 +58,24 @@ class PostsController extends Controller
     public function store(StoreBlogPost $request)
     {
         $validatedPost = $request->validated();
-        Post::create($validatedPost);
+        Post::create(array_merge($validatedPost, ["user_id" => auth()->user()->id]));
         return \redirect('posts');
     }
 
     /**
      * returns view for editing a specific post
      *
-     * @param [type] $id
+     * @param int $id
      * @return void
      */
     public function edit($id)
     {
-        
         try {
             $post = Post::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             abort(404);
         }
-        return \view('posts.edit', compact('post'));
+        return (auth()->user()->id !== (int) $post->user_id) ? $this->redirectNonPostOwner() : \view('posts.edit', compact('post'));
     }
 
     /**
@@ -92,6 +91,12 @@ class PostsController extends Controller
         return \redirect("post/$id");
     }
 
+    /**
+     * deletes a specific post
+     *
+     * @param int $id
+     * @return void
+     */
     public function destroy($id)
     {
         try {
@@ -99,7 +104,21 @@ class PostsController extends Controller
         } catch (ModelNotFoundException $e) {
             abort(404);
         }
-        $post->delete();
-        return \redirect("/posts");
+
+        return (auth()->user()->id !== (int) $post->user_id) ? $this->redirectNonPostOwner() :
+        (function () use ($post) {
+            $post->delete();
+            return \redirect()->back();
+        })();
+    }
+
+    /**
+     * redirect users if they don't own a resource
+     *
+     * @return void
+     */
+    protected function redirectNonPostOwner()
+    {
+        return \redirect()->back()->with('failure', 'Unauthorized action');
     }
 }

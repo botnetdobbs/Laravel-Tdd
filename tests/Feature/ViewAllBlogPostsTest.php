@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Post;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,9 +20,11 @@ class ViewAllBlogPostsTest extends TestCase
     public function userCanViewAllBlogPosts()
     {
         // arrange
-        $post1 = \factory(Post::class)->create();
-        $post2 = \factory(Post::class)->create();
-        $post3 = \factory(Post::class)->create();
+        $user = \factory(User::class)->create();
+        $this->be($user);
+        $post1 = \factory(Post::class)->create(['user_id' => $user->id]);
+        $post2 = \factory(Post::class)->create(['user_id' => $user->id]);
+        $post3 = \factory(Post::class)->create(['user_id' => $user->id]);
 
         // act
         $response = $this->get('/posts');

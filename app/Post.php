@@ -12,4 +12,9 @@ class Post extends Model
     {
         return $this->created_at->toFormattedDateString();
     }
+
+    public function author()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 }

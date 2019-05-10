@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PagesControllerTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**
@@ -38,6 +37,5 @@ class PagesControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Dashboard');
-
     }
 }

@@ -19,7 +19,7 @@ class CreatePostTest extends DuskTestCase
     {
         $user = \factory(App\User::class)->create();
 
-        $this->browse(function(Browser $browser) {
+        $this->browse(function (Browser $browser) {
             $browser->loginAs($user)
                 ->visit('/posts/create')
                 ->type('title', 'New Post')
@@ -27,7 +27,7 @@ class CreatePostTest extends DuskTestCase
                 ->press('Save Post')
                 ->assertPathIs('/posts')
                 ->assertSee('New Post');
-        }); 
+        });
     }
 
     /**
@@ -37,9 +37,9 @@ class CreatePostTest extends DuskTestCase
      */
     public function onlyAuthUserCanCreatePost()
     {
-        $this->browse(function(Browser $browser) {
+        $this->browse(function (Browser $browser) {
             $browser->visit('/posts/create')
                 ->assertPathIs('/login');
-        }); 
+        });
     }
 }

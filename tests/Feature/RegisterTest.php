@@ -9,6 +9,11 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function aUserCanViewRegisterPage()
     {
         $response = $this->get('/register');

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Post;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,7 +19,9 @@ class ViewBlogPostTest extends TestCase
     public function userCanViewABlogPost()
     {
         // Arrangement step - create an article
-        $post = \factory(Post::class)->create();
+        $user = \factory(User::class)->create();
+        $this->be($user);
+        $post = \factory(Post::class)->create(['user_id' => $user->id]);
 
         // Action step - visit the route
         $response = $this->get("/post/{$post->id}");
