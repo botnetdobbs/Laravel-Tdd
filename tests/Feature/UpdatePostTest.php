@@ -60,4 +60,21 @@ class UpdatePostTest extends TestCase
 
         $response->assertStatus(302); // redirect to login
     }
+
+    /**
+     * @group edit-non
+     * @test
+     *
+     * @return void
+     */
+    public function userEditNonExistingPostReturns404()
+    {
+        $this->be(\factory(User::class)->create());
+        $nonExistingPostID = 1;
+
+        $response = $this->get("post/{$nonExistingPostID}/edit");
+
+        $response->assertStatus(404);
+
+    }
 }
