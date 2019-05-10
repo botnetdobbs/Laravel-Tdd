@@ -52,6 +52,14 @@ $ php artisan db:seed
 ```
 $ php artisan serve
 ```
+##### NB: You can now log in via the following credentials
+```
+email: test@email.com
+```
+```
+password: password
+```
+
 ## Running the tests
 ### Browser tests
 ```

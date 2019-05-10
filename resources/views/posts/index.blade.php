@@ -16,7 +16,7 @@
     </div>
     <div class="card-footer text-muted">
         Posted on {{$post->createdAt()}} by
-        <a href="#">User Unavailabe ATM</a>
+        <a href="/user/{{$post->author['name']}}">{{$post->author['name']}}</a>
     </div>
 </div>
 

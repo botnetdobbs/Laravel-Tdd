@@ -11,20 +11,25 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-     public function aUserCanViewLoginPage()
-     {
-          $response = $this->get('/login');
-          $response->assertStatus(200);
-          $response->assertSee('Login');
-     }
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function aUserCanViewLoginPage()
+    {
+        $response = $this->get('/login');
+        $response->assertStatus(200);
+        $response->assertSee('Login');
+    }
 
     /**
      * @test
      *
      * @return void
      */
-   public function aUserCanLogIn()
-   {
+    public function aUserCanLogIn()
+    {
         // arrange phase - create user
         $user = \factory(User::class)->create();
 
@@ -33,5 +38,5 @@ class LoginTest extends TestCase
 
         // assertion phase
         $response->assertStatus(302); // returns a redirect
-   }
+    }
 }
