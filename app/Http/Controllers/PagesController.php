@@ -14,6 +14,7 @@ class PagesController extends Controller
     public function index()
     {
         if (auth()->user()) {
+            // $user = User::with('posts')->get();
             return \view('home');
         }
         return \view('pages.landing');

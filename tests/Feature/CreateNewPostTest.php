@@ -14,7 +14,7 @@ class CreateNewPostTest extends TestCase
     /**
      * @group view-create-page
      * @test
-     * 
+     *
      * @return void
      */
     public function canViewPageForCreatingPost()
@@ -39,8 +39,7 @@ class CreateNewPostTest extends TestCase
             'title' => 'new Post',
             'body' => 'new post created just now',
         ];
-        $this->be(\factory(User::class)->create());
-
+        $user = $this->be(\factory(User::class)->create());
         //action
         $response = $this->post('/posts', $post);
 

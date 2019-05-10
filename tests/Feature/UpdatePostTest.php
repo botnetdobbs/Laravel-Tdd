@@ -20,8 +20,9 @@ class UpdatePostTest extends TestCase
      */
     public function userShouldBeAbleToViewEditPage()
     {
-        $post = \factory(Post::class)->create();
-        $this->be(\factory(User::class)->create());
+        $user = \factory(User::class)->create();
+        $this->be($user);
+        $post = \factory(Post::class)->create(['user_id' => $user->id]);
 
         $response = $this->get("post/{$post->id}/edit");
 
@@ -37,8 +38,10 @@ class UpdatePostTest extends TestCase
      */
     public function aUserShouldBeAbleToUpdatePosts()
     {
-        $post = \factory(Post::class)->create();
-        $this->be(\factory(User::class)->create());
+        $user = \factory(User::class)->create();
+        $this->be($user);
+        $post = \factory(Post::class)->create(['user_id' => $user->id]);
+        
         $updatePost = ['title' => 'Update Title', 'body' => 'Update description'];
 
         $response = $this->put("/post/{$post->id}", $updatePost);
@@ -75,6 +78,24 @@ class UpdatePostTest extends TestCase
         $response = $this->get("post/{$nonExistingPostID}/edit");
 
         $response->assertStatus(404);
+    }
 
+    /**
+     * @group edit-non-owner
+     * @test
+     *
+     * @return void
+     */
+    public function nonPostOwnerShouldNotBeAbleToAccessEditPage()
+    {
+        $user = \factory(User::class)->create();
+        $user1 = \factory(User::class)->create(['email' => 'testmail@email.com']);
+        $this->be($user);
+
+        $post = \factory(Post::class)->create(['user_id' => $user1->id]);
+
+        $response = $this->get("/post/{$post->id}/edit");
+
+        $response->assertStatus(302);
     }
 }

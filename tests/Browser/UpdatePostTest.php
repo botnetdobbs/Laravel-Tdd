@@ -22,7 +22,7 @@ class UpdatePostTest extends DuskTestCase
         $user = \factory(User::class)->create();
         $post = \factory(Post::class)->create();
 
-        $this->browse(function(Browser $browser) use($user, $post) {
+        $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAs($user)
                     ->visit("/post/{$post->id}/edit")
                     ->assertSee('Edit');
@@ -39,7 +39,7 @@ class UpdatePostTest extends DuskTestCase
         $user = \factory(User::class)->create();
         $post = \factory(Post::class)->create();
 
-        $this->browse(function(Browser $browser) use($user, $post) {
+        $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAs($user)
                     ->visit("/post/{$post->id}/edit")
                     ->type('title', 'New Title')
