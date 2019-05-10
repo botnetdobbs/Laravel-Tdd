@@ -23,6 +23,8 @@ Route::get('/post/{id}/edit', 'PostsController@edit');
 
 Route::put('/post/{id}', 'PostsController@update');
 
+Route::delete('/post/{id}', 'PostsController@destroy');
+
 Route::get('/posts/create', 'PostsController@create');
 
 Auth::routes();

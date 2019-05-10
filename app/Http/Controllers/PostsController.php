@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogPost;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Post;
 
 class PostsController extends Controller
@@ -33,7 +34,7 @@ class PostsController extends Controller
     {
         try {
             $post = Post::findOrFail($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             abort(404);
         }
         return \view('posts.show', \compact('post'));
@@ -69,7 +70,12 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        
+        try {
+            $post = Post::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
         return \view('posts.edit', compact('post'));
     }
 
@@ -84,5 +90,16 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->update($validatedPost);
         return \redirect("post/$id");
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $post = Post::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
+        $post->delete();
+        return \redirect("/posts");
     }
 }
