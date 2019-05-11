@@ -24,7 +24,7 @@ class UpdatePostTest extends TestCase
         $this->be($user);
         $post = \factory(Post::class)->create(['user_id' => $user->id]);
 
-        $response = $this->get("post/{$post->id}/edit");
+        $response = $this->get("posts/{$post->id}/edit");
 
         $response->assertStatus(200);
         $response->assertSee('Edit');
@@ -44,7 +44,7 @@ class UpdatePostTest extends TestCase
         
         $updatePost = ['title' => 'Update Title', 'body' => 'Update description'];
 
-        $response = $this->put("/post/{$post->id}", $updatePost);
+        $response = $this->put("/posts/{$post->id}", $updatePost);
 
         $response->assertStatus(302); // redirect to the specific post view
         $this->assertDatabaseHas('posts', ['title' => $updatePost['title']]);
@@ -59,7 +59,7 @@ class UpdatePostTest extends TestCase
     {
         $post = \factory(Post::class)->create();
 
-        $response = $this->get("post/{$post->id}/edit");
+        $response = $this->get("posts/{$post->id}/edit");
 
         $response->assertStatus(302); // redirect to login
     }
@@ -75,7 +75,7 @@ class UpdatePostTest extends TestCase
         $this->be(\factory(User::class)->create());
         $nonExistingPostID = 1;
 
-        $response = $this->get("post/{$nonExistingPostID}/edit");
+        $response = $this->get("posts/{$nonExistingPostID}/edit");
 
         $response->assertStatus(404);
     }
@@ -94,7 +94,7 @@ class UpdatePostTest extends TestCase
 
         $post = \factory(Post::class)->create(['user_id' => $user1->id]);
 
-        $response = $this->get("/post/{$post->id}/edit");
+        $response = $this->get("/posts/{$post->id}/edit");
 
         $response->assertStatus(302);
     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -17,9 +18,9 @@ class CreatePostTest extends DuskTestCase
      */
     public function aUserCanCreatePost()
     {
-        $user = \factory(App\User::class)->create();
+        $user = \factory(User::class)->create();
 
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) use($user) {
             $browser->loginAs($user)
                 ->visit('/posts/create')
                 ->type('title', 'New Post')

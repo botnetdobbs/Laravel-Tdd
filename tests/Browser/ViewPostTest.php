@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Post;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -17,15 +18,15 @@ class ViewPostTest extends DuskTestCase
      */
     public function aUserCanViewPost()
     {
-        $post = \factory(App\Post::class)->create();
-        $pos1 = \factory(App\Post::class)->create();
+        $post = \factory(Post::class)->create();
+        $post1 = \factory(Post::class)->create();
 
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) use($post, $post1) {
             $browser->visit('/posts')
                     ->assertSee($post->title)
-                    ->clickLink($post1->title)
-                    ->assertPathIs("posts/{$post1->id}")
-                    ->assertSee($post1->title);
+                    ->clickLink('Read More')
+                    ->assertPathIs("/posts/{$post->id}")
+                    ->assertSee($post->title);
         });
     }
 }

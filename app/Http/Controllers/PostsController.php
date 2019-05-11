@@ -33,7 +33,7 @@ class PostsController extends Controller
     public function show($id)
     {
         try {
-            $post = Post::findOrFail($id);
+            $post = Post::with('comments')->findOrFail($id);
         } catch (ModelNotFoundException $e) {
             abort(404);
         }
@@ -88,7 +88,7 @@ class PostsController extends Controller
         $validatedPost = $request->validated();
         $post = Post::find($id);
         $post->update($validatedPost);
-        return \redirect("post/$id");
+        return \redirect("posts/$id");
     }
 
     /**

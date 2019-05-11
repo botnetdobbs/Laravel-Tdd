@@ -24,7 +24,7 @@ class UpdatePostTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAs($user)
-                    ->visit("/post/{$post->id}/edit")
+                    ->visit("/posts/{$post->id}/edit")
                     ->assertSee('Edit');
         });
     }
@@ -41,11 +41,11 @@ class UpdatePostTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAs($user)
-                    ->visit("/post/{$post->id}/edit")
+                    ->visit("/posts/{$post->id}/edit")
                     ->type('title', 'New Title')
                     ->type('body', 'New Body')
                     ->press('Save Post')
-                    ->assertPathIs("/post/{$post->id}");
+                    ->assertPathIs("/posts/{$post->id}");
         });
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 
 <h1>Edit Post</h1>
-<form method="POST" action="/post/{{$post->id}}">
+<form method="POST" action="/posts/{{$post->id}}">
   {{ method_field('PUT') }}
     <div class="form-group">
       <label for="title">Title</label>

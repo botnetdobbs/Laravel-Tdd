@@ -17,15 +17,17 @@ Route::get('/posts', 'PostsController@index');
 
 Route::post('/posts', 'PostsController@store');
 
-Route::get('/post/{id}', 'PostsController@show');
-
-Route::get('/post/{id}/edit', 'PostsController@edit');
-
-Route::put('/post/{id}', 'PostsController@update');
-
-Route::delete('/post/{id}', 'PostsController@destroy');
-
 Route::get('/posts/create', 'PostsController@create');
+
+Route::get('/posts/{id}', 'PostsController@show');
+
+Route::get('/posts/{id}/edit', 'PostsController@edit');
+
+Route::put('/posts/{id}', 'PostsController@update');
+
+Route::delete('/posts/{id}', 'PostsController@destroy');
+
+Route::post('/posts/{id}/comments', 'CommentsController@store');
 
 Auth::routes();
 
