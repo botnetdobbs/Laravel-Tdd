@@ -12,7 +12,17 @@
     <div class="card-body">
         <h2 class="card-title">{{$post->title}}</h2>
         <p class="card-text">{{Str::limit($post->body)}}</p>
-        <a class="btn btn-secondary" href="/post/{{$post->id}}" role="button">Read More → »</a>
+        <a class="btn btn-secondary float-left" href="/post/{{$post->id}}" role="button">Read More → »</a>
+        @if (auth()->user()->id === (int)$post->user_id)
+        <div class="float-right">
+            <a class="btn btn-primary" href="/post/{{$post->id}}/edit" role="button">Edit <span class="fa fa-edit"></span></a>
+            <form class="float-right ml-3" action="/post/{{$post->id}}" method="POST">
+            {{ method_field('DELETE') }}
+            <button type="submit" class="btn btn-danger">Delete <span class="fa fa-trash"></span></button>
+            {{ csrf_field() }}
+            </form>
+        </div>
+        @endif
     </div>
     <div class="card-footer text-muted">
         Posted on {{$post->createdAt()}} by

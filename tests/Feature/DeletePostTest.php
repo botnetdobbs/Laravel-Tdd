@@ -64,4 +64,41 @@ class DeletePostTest extends TestCase
 
         $response->assertStatus(302);
     }
+
+    /**
+     * @group non-owner-delete-button
+     * @test
+     *
+     * @return void
+     */
+    public function nonOwnerCannotViewDeleteButton()
+    {
+        $user = \factory(User::class)->create();
+        $user1 = \factory(User::class)->create(['email' => 'testmail@email.com']);
+        $this->be($user);
+
+        $post = \factory(Post::class)->create(['user_id' => $user1->id]);
+
+        $response = $this->get('/posts');
+
+        $response->assertDontSee('Delete');
+    }
+
+    /**
+     * @group owner-delete-button
+     * @test
+     *
+     * @return void
+     */
+    public function OwnerCanViewDeleteButton()
+    {
+        $user = \factory(User::class)->create();
+        $this->be($user);
+
+        $post = \factory(Post::class)->create(['user_id' => $user->id]);
+
+        $response = $this->get('/posts');
+
+        $response->assertSee('Delete');
+    }
 }

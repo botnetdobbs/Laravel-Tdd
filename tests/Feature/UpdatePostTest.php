@@ -98,4 +98,41 @@ class UpdatePostTest extends TestCase
 
         $response->assertStatus(302);
     }
+
+    /**
+     * @group non-owner-edit-button
+     * @test
+     *
+     * @return void
+     */
+    public function nonOwnerCannotViewEditButton()
+    {
+        $user = \factory(User::class)->create();
+        $user1 = \factory(User::class)->create(['email' => 'testmail@email.com']);
+        $this->be($user);
+
+        $post = \factory(Post::class)->create(['user_id' => $user1->id]);
+
+        $response = $this->get('/posts');
+
+        $response->assertDontSee('Edit');
+    }
+
+    /**
+     * @group owner-edit-button
+     * @test
+     *
+     * @return void
+     */
+    public function ownerCanViewEditButton()
+    {
+        $user = \factory(User::class)->create();
+        $this->be($user);
+
+        $post = \factory(Post::class)->create(['user_id' => $user->id]);
+
+        $response = $this->get('/posts');
+
+        $response->assertSee('Edit');
+    }
 }
