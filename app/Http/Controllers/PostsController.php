@@ -20,7 +20,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::with("author")->get();
+        $posts = Post::with("author")->paginate(8);
         return view('posts.index', compact('posts'));
     }
 

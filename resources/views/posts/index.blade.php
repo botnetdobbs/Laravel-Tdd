@@ -29,8 +29,10 @@
         <a href="/user/{{$post->author['name']}}">{{$post->author['name']}}</a>
     </div>
 </div>
-
 @endforeach
+<div class="d-flex justify-content-center">
+    {{ $posts->links() }}
+</div>
 
 </div>
 <div class="col-md-4 mt-4">
