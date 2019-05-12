@@ -2,6 +2,7 @@
 [![CircleCI](https://circleci.com/gh/botnetdobbs/Laravel-Tdd.svg?style=svg)](https://circleci.com/gh/botnetdobbs/Laravel-Tdd)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f24837ce3bb6cedb9205/test_coverage)](https://codeclimate.com/github/botnetdobbs/Laravel-Tdd/test_coverage)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-responsibility.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
 
