@@ -24,7 +24,7 @@ class DeletePostTest extends TestCase
         $this->be($user);
         $post = \factory(Post::class)->create(['user_id' => $user->id]);
 
-        $response = $this->delete("/post/{$post->id}");
+        $response = $this->delete("/posts/{$post->id}");
 
         $response->assertStatus(302);
         $this->assertDatabaseMissing('posts', ['title' => $post->title]);
@@ -41,7 +41,7 @@ class DeletePostTest extends TestCase
         $this->be(\factory(User::class)->create());
         $nonExistingPostId = 9;
 
-        $response = $this->delete("post/{$nonExistingPostId}");
+        $response = $this->delete("posts/{$nonExistingPostId}");
 
         $response->assertStatus(404);
     }
@@ -60,7 +60,7 @@ class DeletePostTest extends TestCase
 
         $post = \factory(Post::class)->create(['user_id' => $user1->id]);
 
-        $response = $this->delete("/post/{$post->id}");
+        $response = $this->delete("/posts/{$post->id}");
 
         $response->assertStatus(302);
     }

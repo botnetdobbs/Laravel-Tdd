@@ -1,0 +1,3 @@
+## Note
+- The browser(dusk) tests weren't running on my machine and I was writing them anyway(blindly). Was getting this error ```Facebook\WebDriver\Exception\SessionNotCreatedException: session not created: Chrome version must be between 70 and 73
+  (Driver info: chromedriver=2.45.615355 (d5698f682d8b2742017df6c81e0bd8e6a3063189),platform=Mac OS X 10.14.3 x86_64)```. Just fixed it(sigh!) and the tests are passing.

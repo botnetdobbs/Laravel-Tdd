@@ -8,8 +8,10 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class EditPost extends DuskTestCase
+class EditPostTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
     /**
      * @test
      *
@@ -20,11 +22,11 @@ class EditPost extends DuskTestCase
         $user = \factory(User::class)->create();
         $post = \factory(Post::class)->create(["user_id" => $user->id]);
 
-        $this->browse(function(Browser $browser) use($user) {
+        $this->browse(function(Browser $browser) use($user, $post) {
             $browser->loginAS($user)
                     ->visit("/posts")
-                    ->press("Edit")
-                    ->assertPathIs("/post/{$post->id}/edit");
+                    ->clickLink("Edit")
+                    ->assertPathIs("/posts/{$post->id}/edit");
         });
     }
 
@@ -41,11 +43,11 @@ class EditPost extends DuskTestCase
         $this->browse(function(Browser $browser) use($user, $post) {
             $browser->loginAS($user)
                     ->visit("/posts")
-                    ->press("Edit")
-                    ->assertPathIs("/post/{$post->id}/edit")
+                    ->clickLink("Edit")
+                    ->assertPathIs("/posts/{$post->id}/edit")
                     ->type('title', 'Some New Words')
                     ->press("Save Post")
-                    ->assertPathIs("/post{$post->id}")
+                    ->assertPathIs("/posts/{$post->id}")
                     ->assertSee("Some New Words");
         });
     }

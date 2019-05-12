@@ -24,7 +24,7 @@ class ViewBlogPostTest extends TestCase
         $post = \factory(Post::class)->create(['user_id' => $user->id]);
 
         // Action step - visit the route
-        $response = $this->get("/post/{$post->id}");
+        $response = $this->get("/posts/{$post->id}");
 
         //Assertion step - status code 200 etc
         $response->assertStatus(200);
@@ -46,7 +46,7 @@ class ViewBlogPostTest extends TestCase
 
         // Action step - visit the route
         $id = 100;
-        $response = $this->get("/post/{$id}");
+        $response = $this->get("/posts/{$id}");
 
         //Assertion step - status code 400 etc
         $response->assertStatus(404);
