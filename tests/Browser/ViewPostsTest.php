@@ -21,7 +21,7 @@ class ViewPostsTest extends DuskTestCase
         $post = \factory(Post::class)->create();
         $post1 = \factory(Post::class)->create();
 
-        $this->browse(function (Browser $browser) use($post, $post1) {
+        $this->browse(function (Browser $browser) use ($post, $post1) {
             $browser->visit('/posts')
                     ->assertSee($post->title)
                     ->assertSee($post1->title);

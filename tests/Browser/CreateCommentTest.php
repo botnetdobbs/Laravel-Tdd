@@ -10,7 +10,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class CreateCommentTest extends DuskTestCase
 {
-
     use DatabaseMigrations;
 
     /**
@@ -23,7 +22,7 @@ class CreateCommentTest extends DuskTestCase
         $user = \factory(User::class)->create();
         $post = \factory(Post::class)->create(["user_id" => $user->id]);
 
-        $this->browse(function (Browser $browser) use($user, $post) {
+        $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAs($user)
                     ->visit("/posts/{$post->id}")
                     ->type("body", "Good vibes")
