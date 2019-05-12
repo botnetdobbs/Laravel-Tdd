@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CommentsTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**

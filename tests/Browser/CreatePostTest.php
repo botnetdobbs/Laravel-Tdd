@@ -20,7 +20,7 @@ class CreatePostTest extends DuskTestCase
     {
         $user = \factory(User::class)->create();
 
-        $this->browse(function (Browser $browser) use($user) {
+        $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/posts/create')
                 ->type('title', 'New Post')

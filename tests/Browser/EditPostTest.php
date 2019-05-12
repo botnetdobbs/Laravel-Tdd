@@ -22,7 +22,7 @@ class EditPostTest extends DuskTestCase
         $user = \factory(User::class)->create();
         $post = \factory(Post::class)->create(["user_id" => $user->id]);
 
-        $this->browse(function(Browser $browser) use($user, $post) {
+        $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAS($user)
                     ->visit("/posts")
                     ->clickLink("Edit")
@@ -40,7 +40,7 @@ class EditPostTest extends DuskTestCase
         $user = \factory(User::class)->create();
         $post = \factory(Post::class)->create(["user_id" => $user->id]);
 
-        $this->browse(function(Browser $browser) use($user, $post) {
+        $this->browse(function (Browser $browser) use ($user, $post) {
             $browser->loginAS($user)
                     ->visit("/posts")
                     ->clickLink("Edit")

@@ -20,7 +20,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::with("author")->paginate(8);
+        $posts = Post::with("author")->latest()->paginate(8);
         return view('posts.index', compact('posts'));
     }
 
@@ -59,7 +59,7 @@ class PostsController extends Controller
     {
         $validatedPost = $request->validated();
         Post::create(array_merge($validatedPost, ["user_id" => auth()->user()->id]));
-        return \redirect('posts');
+        return \redirect('/posts');
     }
 
     /**
