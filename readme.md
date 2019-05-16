@@ -73,4 +73,4 @@ password: password
 - $ ./vendor/bin/phpunit
 ```
 
-- Pardon on the UI. The focus of this is on Testing the laravel.
+- Pardon on the UI. The focus of this is on me learning Testing and TDD in Laravel.
