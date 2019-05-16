@@ -64,6 +64,7 @@ password: password
 
 ## Running the tests
 ### Browser tests
+- Create a db for running browser tests and add the creds on the `.env.dusk.local` file
 ```
 - $ php artisan dusk
 ```
