@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class PagesController extends Controller
 {
@@ -14,8 +15,8 @@ class PagesController extends Controller
     public function index()
     {
         if (auth()->user()) {
-            // $user = User::with('posts')->get();
-            return \view('home');
+            $user = User::find(auth()->user()->id)->with('posts')->first();
+            return \view('home', compact('user'));
         }
         return \view('pages.landing');
     }
